@@ -66,7 +66,7 @@
             }
         }).then(res => {
             if (res && res.data && res.data.success){
-                checkTimer();
+                Timer();
                 document.querySelector('h1.row').innerHTML= 'Dashboard';
                 document.querySelector('main').innerHTML= res.data.myContent;
             }
@@ -82,28 +82,28 @@
             }
         }).then(res => {
             if (res && res.data && res.data.success){
-                checkTimer();
+                Timer();
                 document.querySelector('h1.row').innerHTML= 'setting';
                 document.querySelector('main').innerHTML= res.data.myContent;
             }
         });
     }
 
-    function checkTimer(){
+    function Timer(){
         const token = localStorage.getItem('jwt');
         if(token){
-            var base64Url = token.split('.')[1];
+            var a = token.split('.')[1];
 
-            var decodedToken = JSON.parse(window.atob(base64Url));
-            console.log(decodedToken);
-            const { exp } = decodedToken;
+            var d = JSON.parse(window.atob(a));
+            console.log(d);
+            const { exp } = d;
             console.log(exp);
             if (Date.now() >= exp * 1000) {
                 localStorage.removeItem('jwt');
                 window.location.href = '/';
             }  
             var timeLeft = ((exp*1000) - new Date());
-            setTimeout(function(){ checkTimer() }, timeLeft);
+            setTimeout(function(){ Timer() }, timeLeft);
         }
          
     }

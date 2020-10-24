@@ -42,7 +42,7 @@ app.post('/api/login', (req, res) => {
     const { username, password } =req.body;
    for (let user of users){
     if (username == user.username && password == user.password){
-        let token = jwt.sign({id: user.id, username: user.username}, secretKey,{ expiresIn: 180000000 });
+        let token = jwt.sign({id: user.id, username: user.username}, secretKey,{ expiresIn: '3M' });
             res.json({
                 success: true,
                 err: null,
